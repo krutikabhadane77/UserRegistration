@@ -2,6 +2,7 @@
 //UC2 As a User need to enter a valid Last Name
 //UC3 As a User need to enter a valid email
 //UC4 As a User need to follow pre-defined Mobile Format
+//UC5 - UC8 As a User need to follow pre-defined password rules
 package com.userregistration;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -62,12 +63,27 @@ public class UserRegistration {
             System.out.println(number + " is not valid");
         }
     }
+
+    public void validPassword() {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter password : ");
+        String password=sc.next();
+        String regex="((?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%]).{8,20})";
+        boolean answer = Pattern.matches(regex,password);
+        if (answer) {
+            System.out.println(password + " is valid");
+        }
+        else {
+            System.out.println(password + " is not valid");
+        }
+    }
     public static void main(String[] args) {
         UserRegistration user = new UserRegistration();
         user.firstName();
         user.lastName();
         user.validEmail();
         user.mobileNumber();
+        user.validPassword();
     }
 }
 
