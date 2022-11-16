@@ -3,8 +3,11 @@
 //UC3 As a User need to enter a valid email
 //UC4 As a User need to follow pre-defined Mobile Format
 //UC5 - UC8 As a User need to follow pre-defined password rules
+//UC9 Should clear all email samples provided separately
 package com.userregistration;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserRegistration {
@@ -63,7 +66,6 @@ public class UserRegistration {
             System.out.println(number + " is not valid");
         }
     }
-
     public void validPassword() {
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter password : ");
@@ -77,6 +79,26 @@ public class UserRegistration {
             System.out.println(password + " is not valid");
         }
     }
+
+
+    ArrayList<String> emails=new ArrayList<>();
+    public void validEmailSamples(){
+        emails.add("abc@yahoo.com");
+        emails.add("abc-100@yahoo.com");
+        emails.add("abc.100@yahoo.com");
+        emails.add("abc111@abc.com");
+        emails.add("abc-100@abc.net");
+        emails.add("abc.100@abc.com.au");
+        emails.add("abc@1.com");
+        emails.add("abc@gmail.com.com");
+        emails.add("abc+100@gmail.com");
+        String regex="[a-zA-Z0-9_.]*[-]*[+]*[a-zA-Z0-9]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
+        Pattern pattern=Pattern.compile(regex);
+        for(int i=0;i<emails.size();i++){
+            Matcher matcher=pattern.matcher(emails.get(i));
+            System.out.println(emails.get(i)+"->"+matcher.matches());
+        }
+    }
     public static void main(String[] args) {
         UserRegistration user = new UserRegistration();
         user.firstName();
@@ -84,6 +106,7 @@ public class UserRegistration {
         user.validEmail();
         user.mobileNumber();
         user.validPassword();
+        user.validEmailSamples();
     }
 }
 
